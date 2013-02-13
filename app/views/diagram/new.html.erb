@@ -1,0 +1,58 @@
+<% provide(:title, 'Pool Table Diagram Generator') %>
+<h1>Create a Diagram</h1>
+<p>Use this tool to generate a diagram of a pool situation. Upon successful generation a PNG image will be provided.</p>
+
+<script type="text/javascript">
+  $ = jQuery;
+  $(function() {
+
+      $('#ball-select').change(function(event) {
+          var selector = $(event.currentTarget)
+          if (selector.val().length == 0) {
+              return;
+          }
+          $('<div/>')
+              .append(
+                  $('<label/>').text(selector.val())
+              )
+              .append(
+                  $('<input/>', {
+                      id: 'ballx-' + selector.val(),
+                      type: 'text',
+                      name: 'balls[' + selector.val() + '][x]'
+                  })
+              ).append(
+                  $('<input/>', {
+                      type: 'text',
+                      name: 'balls[' + selector.val() + '][y]'
+                  })
+              ).appendTo($('#diagram-parameters'));
+          $('#ballx-' + selector.val()).focus();
+      });
+  });
+</script>
+
+<form id="diagram-parameters" method="post" action="/diagram">
+  <select id="ball-select">
+    <option class="ball-option" label="---" value=""/>
+    <option class="ball-option" label="cue" value="cue"/>
+    <option class="ball-option" label="target" value="target"/>
+    <option class="ball-option" label="1" value="1"/>
+    <option class="ball-option" label="2" value="2"/>
+    <option class="ball-option" label="3" value="3"/>
+    <option class="ball-option" label="4" value="4"/>
+    <option class="ball-option" label="5" value="5"/>
+    <option class="ball-option" label="6" value="6"/>
+    <option class="ball-option" label="7" value="7"/>
+    <option class="ball-option" label="8" value="8"/>
+    <option class="ball-option" label="9" value="9"/>
+    <option class="ball-option" label="10" value="10"/>
+    <option class="ball-option" label="11" value="11"/>
+    <option class="ball-option" label="12" value="12"/>
+    <option class="ball-option" label="13" value="13"/>
+    <option class="ball-option" label="14" value="14"/>
+    <option class="ball-option" label="15" value="15"/>
+  </select>
+  <input type="submit" value="Generate"/>
+</form>
+
