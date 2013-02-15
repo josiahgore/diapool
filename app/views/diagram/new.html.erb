@@ -8,26 +8,34 @@
 
       $('#ball-select').change(function(event) {
           var selector = $(event.currentTarget)
-          if (selector.val().length == 0) {
+          var ball = selector.val();
+          if (ball.length == 0) {
               return;
           }
-          $('<div/>')
+          $('<div/>', { id: 'ball-input-' + ball })
               .append(
-                  $('<label/>').text(selector.val())
+                  $('<label/>').text(ball)
               )
               .append(
                   $('<input/>', {
-                      id: 'ballx-' + selector.val(),
+                      id: 'ballx-' + ball,
                       type: 'text',
-                      name: 'balls[' + selector.val() + '][x]'
+                      name: 'balls[' + ball + '][x]'
                   })
               ).append(
                   $('<input/>', {
+                      id: 'bally-' + ball,
                       type: 'text',
-                      name: 'balls[' + selector.val() + '][y]'
+                      name: 'balls[' + ball + '][y]'
                   })
+              ).append(
+                  $('<button/>')
+                      .text('X')
+                      .click(function(event) {
+                          $('#ball-input-' + selector.val()).remove();
+                      })
               ).appendTo($('#diagram-parameters'));
-          $('#ballx-' + selector.val()).focus();
+          $('#ballx-' + ball).focus();
       });
   });
 </script>
