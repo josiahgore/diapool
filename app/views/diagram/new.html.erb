@@ -32,7 +32,8 @@
                   $('<button/>')
                       .text('X')
                       .click(function(event) {
-                          $('#ball-input-' + selector.val()).remove();
+                          $('#ball-input-' + ball).remove();
+                          return false;
                       })
               ).appendTo($('#diagram-parameters'));
           $('#ballx-' + ball).focus();
